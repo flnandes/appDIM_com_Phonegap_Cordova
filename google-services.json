@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "904426831880",
+    "firebase_url": "https://dimgitaldimapp.firebaseio.com",
+    "project_id": "dimgitaldimapp",
+    "storage_bucket": "dimgitaldimapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904426831880:android:91d4427dbed3429d5d51bd",
+        "android_client_info": {
+          "package_name": "com.dimgitaldimapp.onesignalnotification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904426831880-ak9ebsi2kme0g2vjdmb6n68v2bc6n031.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6sUsy_QGWaJoZyNMtT9eX-6yY3b0xNDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904426831880-ak9ebsi2kme0g2vjdmb6n68v2bc6n031.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

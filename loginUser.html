@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>dimgitaldim</title>
+    <meta name="theme-color" content="rgb(3, 2, 77)">
+</head>
+<body>
+<resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml" />
+    <div class="app">
+            <div  class="header navbar-fixed-top">
+                    <div id="logoTop" class="nav text-center">
+                        <img  src="img/logo.png" title="dimgital D.I.M">
+                    </div><h5 id="nameTop"></h5>
+            </div>
+        <div id="containerLogin" class="container loginUser">
+            <div id="panel-login" class="painel-login" name="formUser">
+                <input id="form-login1" name="nome" type="text" class="form-login" value="" placeholder="Insira seu login">
+                <input id="formPassword1" type="password" name="senha" class="form-login" value="" placeholder="Insira sua Senha">
+                <div>
+                    <button type="submit" class="btn btn-prymary" onclick="btnEntrar()">Entrar</button>
+                    <button class="btn btn-prymary" onclick="btnRegistro()">Criar Conta</button>
+                </div>
+            </div>
+        <div id="containerRegistro" class="container Register">
+            <div class="painel-register">
+                <span>Nome: </span><input id="form-login" type="text"  class="form-login" value="" placeholder="login" required><br>
+                <span>Senha: </span><input id="passaword" type="password"  class="form-login" value="" placeholder="senha" required><br>
+                <span>Contato: </span><input id="contact" type="contact"  class="form-login" value="" placeholder="contact" required><br>
+                <span>email: </span><input id="emailregister"  type="email" class="form-login" value="" placeholder="e-mail" required><br>                
+                <span>Cidade: </span><input id="city" type="text"  class="form-login" value="" placeholder="cidade" required><br>
+                <span>Estado </span><input id="country" type="text"  class="form-login" value="" placeholder="estado" required><br>
+                <div>
+                    <button class="btn btn-prymary" onclick="btnRegistrar()">Criar Conta</button>
+                </div>
+            </div>
+        </div>
+        <div id="containerRegistrado" class="container Registrado">
+            <div class="painel-registrado">
+                <span>Nome: </span><span><h2 id="nameRegistrado"></h2></span><br>
+                <span>Senha: </span><span><h2 id="senhaRegistrado"></h2></span><br>
+                <span>Contato: </span><span><h2 id="contatoRegistrado"></h2></span><br>
+                <span>email: </span><span><h2 id="emailRegistrado"></h2></span><br>
+                <span>Cidade: </span><span><h2 id="cidadeRegistrado"></h2></span><br>
+                <span>Estado: </span><span><h2 id="estadoRegistrado"></h2></span><br>
+            </div>
+        </div>
+        <div id="telaCarregamento" class="page">
+            <img src="img/Blocks-0.6s-146px.svg"class="img-load">
+        </div> 
+    </div>
+    <div class="footer navbar-fixed-bottom">
+        <div class="nav text-center">
+            <ul class="pagination">
+            <li><a id="Inicio" href="index.html" title="Inicio" value="inicio"><div class="glyphicon glyphicon-home"></div><br><h4>Inicio</h4></a></li>
+            <li class="active"><a href="loginUser.html" title="Acesse sua conta"><div class="glyphicon glyphicon-user"></div><br><h4>Conta</h4></a></li>
+              <li><a href="projetos.html" title="Encontre seu projeto"><div class="glyphicon glyphicon-open"></div><br><h4>Projetos</h4></a></li>
+              <li><a href="https://www.dimgitaldim.com" title="Procura"><div class="glyphicon glyphicon-globe"></div><br><h4>Site</h4></a></li>
+            </ul>
+        </div> 
+        </div>
+
+<!---- scripts do aplicativo ---->
+ 	<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/users.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

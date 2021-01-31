@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>dimgitaldim</title>
+    <meta name="theme-color" content="rgb(3, 2, 77)">
+</head>
+<body> 
+<script type="text/javascript">
+    app.initialize();
+
+    var db = window.openDatabase("Database", "1.0", "usuarios", 2000000);
+    db.transaction(createDB, errorDB, successDB);
+    document.addEventListener("deviceready", onDeviceReady, false);
+    
+    function onDeviceReady(){
+        
+        db.transaction(createDB, errorDB, successDB);
+    }
+
+    function errorDB(err){
+        alert("Erro: "+err);
+    }
+    function successDB(){}
+
+    //Criar a tabela se a mesma não existir    
+    function createDB(tx){
+        tx.executeSql('CREATE TABLE IF NOT EXISTS usuarios (id INTEGER PRIMARY KEY, nome VARCHAR(500), telefone NUM(11) )');            
+    }
+    
+    //Insere informações no banco de dados
+    function agenda_insert()
+    {
+        db.transaction(agenda_insert_db, errorDB, successDB);
+    }
+    function agenda_insert_db(tx){
+        
+        var nome = $("#agenda_nome").val();
+        var telefone = $("#agenda_telefone").val();
+
+        tx.executeSql('INSERT INTO agenda (nome, telefone) VALUES ("'+ nome +'", "'+ telefone +'")');
+        agenda_view();
+    }
+    function agenda_update_abrir_tela(agenda_id){
+    	$("#tela_padrao").hide();
+    	$("#tela_edicao").show();
+
+    	var agenda_nome_update = $("#agenda_item_"+agenda_id+" .agenda_info h3").html();
+    	var agenda_telefone_update = $("#agenda_item_"+agenda_id+" .agenda_info h5").html();
+
+    	$("#agenda_id_update").val(agenda_id);
+    	$("#agenda_nome_update").val(agenda_nome_update);
+    	$("#agenda_telefone_update").val(agenda_telefone_update);
+    }
+    function agenda_update_fechar_tela(){
+    	$("#tela_edicao").hide();
+    	$("#tela_padrao").show();
+    }
+    function agenda_update(){
+
+    	db.transaction(agenda_update_db, errorDB, successDB);
+    }
+    function agenda_update_db(tx){
+
+    	var agenda_id_novo = $("#agenda_id_update").val();
+    	var agenda_nome_novo = $("#agenda_nome_update").val();
+    	var agenda_telefone_novo = $("#agenda_telefone_update").val();
+
+    	tx.executeSql('UPDATE agenda SET nome = "'+agenda_nome_novo+'", telefone = "'+agenda_telefone_novo+'" WHERE id = "'+agenda_id_novo+'" ');
+
+    	agenda_update_fechar_tela();
+    	agenda_view();
+    }
+
+    function agenda_delete(agenda_id){
+
+    	$("#agenda_id_delete").val(agenda_id);
+
+    	db.transaction(agenda_delete_db, errorDB, successDB);
+
+    }
+    function agenda_delete_db(tx){
+        
+        var agenda_id_delete = $("#agenda_id_delete").val();
+       	
+       	tx.executeSql('DELETE FROM agenda WHERE id = '+ agenda_id_delete +' ');
+        agenda_view();
+    }
+    //Efetua a leitura do banco de dados
+    function agenda_view(){
+        db.transaction(agenda_view_db, errorDB, successDB);
+    }
+    function agenda_view_db(tx){
+        tx.executeSql('SELECT * FROM agenda', [], agenda_view_data, errorDB);
+    }
+    function agenda_view_data(tx, results){
+
+        $("#agenda_listagem").empty();
+
+        var len = results.rows.length;
+
+        for (var i=0; i<len; i++){
+
+            $("#agenda_listagem").append("<tr class='agenda_item_lista' id='agenda_item_" + results.rows.item(i).id + "'>"+
+                                            "<td class='agenda_info'><h3>" + results.rows.item(i).nome + "</h3><h5>" + results.rows.item(i).telefone + "</h5></td>"+
+                                            "<td><input type='button' class='btn btn-lg btn-danger' value='X' onclick='agenda_delete(" + results.rows.item(i).id + ")'><input type='button' class='btn btn-lg btn-warning' value='E' onclick='agenda_update_abrir_tela(" + results.rows.item(i).id + ")'></td>"+
+                                        "<tr>");
+        }
+    }
+    </script>
+    <div class="app">
+        <div class="header navbar-fixed-top">
+            <div class="nav text-center">
+                <img src="img/logo.png" title="dimgital D.I.M">
+            </div>                           
+        </div>
+        <div class="container">
+
+        </div>
+        <div class="container">
+            
+        </div>
+    <div class="navbar navbar-fixed-bottom text-center page page-active">
+    <div class="footer">
+        <div class="nav text-center">
+            <ul class="pagination">
+            <li><a id="Inicio" href="index.html" title="Inicio"><div class="glyphicon glyphicon-home"></div></a></li>
+            <li><a href="index.html" title="Acesse sua conta"><div class="glyphicon glyphicon-user"></div></a></li>
+              <li><a href="index.html" title="Encontre seu projeto"><div class="glyphicon glyphicon-open"></div></a></li>
+              <li><a href="index.html" title="Procura"><div class="glyphicon glyphicon-search"></div></a></li>
+            </ul>
+        </div> 
+        </div>
+    </div>
+</div>
+
+    <div id="telaDeCarregamento" class="page hidden">
+        <img src="img/Blocks-0.6s-146px.svg"class="img-load">
+    </div>
+
+
+    <!---- scripts do aplicativo ---->
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+    <script type="text/javascript" src="cordova.js"></script>
+</body>
+
+</html>
